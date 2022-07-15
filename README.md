@@ -10,10 +10,10 @@
     $ tar -xvf <filename>
     ```
 
-2. Create an alias pointing to the `forc` binary:
+2. Add the binaries to your `PATH`:
 
     ```bash
-    $ alias forc=forc-binaries/forc
+    $ export PATH=$PATH:$(pwd)/forc-binaries/
     ```
 
 3. Check for correct setup:
