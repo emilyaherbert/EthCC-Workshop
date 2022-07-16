@@ -1,5 +1,5 @@
 [project]
-name = "tmp"
+name = "voting"
 version = "0.1.0"
 authors = ["Emily Herbert"]
 edition = "2021"

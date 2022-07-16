@@ -1,18 +1,18 @@
 use fuels::{prelude::*, tx::ContractId};
 
 // Load abi from json
-abigen!(MyContract, "out/debug/tmp-abi.json");
+abigen!(MyContract, "out/debug/voting-abi.json");
 
 async fn get_contract_instance() -> (MyContract, ContractId) {
     // Launch a local network and deploy the contract
     let wallet = launch_provider_and_get_wallet().await;
 
     let id = Contract::deploy(
-        "./out/debug/tmp.bin",
+        "./out/debug/voting.bin",
         &wallet,
         TxParameters::default(),
         StorageConfiguration::with_storage_path(Some(
-            "./out/debug/tmp-storage_slots.json".to_string(),
+            "./out/debug/voting-storage_slots.json".to_string(),
         )),
     )
     .await

@@ -1,22 +1,30 @@
-# EthCC-Workshop
+# EthCC Workshop
 
 ## Getting Started
 
-1. Download [the latest `forc` binaries for your system](https://github.com/FuelLabs/sway/releases/latest)
+1. Install `cargo` using [`rustup`](https://www.rust-lang.org/tools/install)
 
-    and extract them:
-
+    Mac and Linux:
     ```bash
-    $ tar -xvf <filename>
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     ```
 
-2. Add the binaries to your `PATH`:
+2. Check for correct setup:
 
     ```bash
-    $ export PATH=$PATH:$(pwd)/forc-binaries/
+    $ cargo --version
+    cargo 1.62.0
     ```
 
-3. Check for correct setup:
+3. Install `forc` using [`fuelup`](https://fuellabs.github.io/sway/v0.18.1/introduction/installation.html#installing-from-pre-compiled-binaries)
+
+    Mac and Linux:
+    ```bash
+    curl --proto '=https' --tlsv1.2 -sSf \
+    https://fuellabs.github.io/fuelup/fuelup-init.sh | sh
+    ```
+
+4. Check for correct setup:
 
     ```bash
     $ forc --version
@@ -28,18 +36,30 @@
     ![open system preferences](images/system_preferences.png)
     ![click allow](images/allow_forc.png)
 
-4. Download [the latest `fuel-core` binaries for your system](https://github.com/FuelLabs/fuel-core/releases/latest)
+## Editor
 
-    and extract them:
+You are welcome to use your editor of choice.
+
+- [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=FuelLabs.sway-vscode-plugin)
+- [Vim highlighting](https://github.com/FuelLabs/sway.vim)
+
+## Wallet Contract
+
+
+1. Create a new Sway project:
 
     ```bash
-    $ tar -xvf <filename>
+    $ mkdir wallet && cd wallet
+    $ forc init --contract
+
+    $ tree .
+    .
+    ├── Cargo.toml
+    ├── Forc.toml
+    ├── src
+    │   └── main.sw
+    └── tests
+        └── harness.rs
     ```
 
-5. Set up your environment variables:
-
-    ```bash
-    $ export FUEL_CORE_BIN=<binary dir>/fuel-core
-    ```
-
-    For me this looked like: "export FUEL_CORE_BIN=fuel-core-0.9.6-x86_64-apple-darwin/fuel-core"
+2. Complete the wallet example 😊
