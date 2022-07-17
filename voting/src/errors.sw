@@ -10,6 +10,4 @@ pub enum UserError {
     IncorrectAssetSent: (),
     InvalidNumber: (),
     InsufficientBalance: (),
-    //InvalidId: (),
-    //VoteAmountCannotBeZero: (),
 }

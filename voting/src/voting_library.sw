@@ -6,16 +6,13 @@ use std::contract_id::ContractId;
 
 abi Voting {
     #[storage(read, write)]
-    fn initialize(gov_token: ContractId);
+    fn initialize(token: ContractId, max_num: u64);
 
     #[storage(read)]
     fn get_balance() -> u64;
 
     #[storage(read)]
     fn get_favorite_number() -> u64;
-
-    #[storage(read)]
-    fn get_user_votes(voting_for: u64) -> u64;
 
     #[storage(read, write)]
     fn deposit();
@@ -27,10 +24,7 @@ abi Voting {
     fn vote(voting_for: u64, vote_amount: u64);
 
     #[storage(read, write)]
-    fn unlock_votes(voting_for: u64);
-
-    #[storage(read, write)]
-    fn execute();
+    fn execute() -> bool;
 }
 
 pub enum State {
