@@ -12,6 +12,9 @@ abi Voting {
     fn get_balance() -> u64;
 
     #[storage(read)]
+    fn get_user_balance() -> u64;
+
+    #[storage(read)]
     fn get_favorite_number() -> u64;
 
     #[storage(read)]

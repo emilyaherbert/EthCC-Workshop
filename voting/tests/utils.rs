@@ -85,10 +85,6 @@ pub(crate) async fn initialize_voting_contract(
         .unwrap();
 }
 
-pub(crate) async fn get_contract_balance(voting_handle: &Voting) -> u64 {
-    voting_handle.get_balance().call().await.unwrap().value
-}
-
 pub(crate) async fn mint_and_send_to_address(
     token_handle: &MyToken,
     asset_amount: u64,
@@ -147,6 +143,20 @@ pub(crate) async fn vote_for_number(voting_handle: &Voting, voting_for: u64, vot
 pub(crate) async fn execute_in_voting_contract(voting_handle: &Voting) -> bool {
     voting_handle
         .execute()
+        .append_variable_outputs(1)
+        .call()
+        .await
+        .unwrap()
+        .value
+}
+
+pub(crate) async fn get_contract_balance(voting_handle: &Voting) -> u64 {
+    voting_handle.get_balance().call().await.unwrap().value
+}
+
+pub(crate) async fn get_user_balance(voting_handle: &Voting) -> u64 {
+    voting_handle
+        .get_user_balance()
         .append_variable_outputs(1)
         .call()
         .await

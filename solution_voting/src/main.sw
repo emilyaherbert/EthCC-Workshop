@@ -62,6 +62,14 @@ impl Voting for Contract {
         this_balance(storage.token)
     }
 
+    // get the number of tokens a user has deposited in the contract
+    #[storage(read)]
+    fn get_user_balance() -> u64 {
+        require(storage.state == State::Initialized, InitializationError::ContractNotInitialized);
+        let user = msg_sender().unwrap();
+        storage.user_balances.get(user)
+    }
+
     // get the current favorite number
     #[storage(read)]
     fn get_favorite_number() -> u64 {
