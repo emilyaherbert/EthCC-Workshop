@@ -8,9 +8,10 @@ We are writing a smart contract for a group of people who love numbers! They wan
 1. Download this repo
 2. [Get set up](#getting-started)
 3. [Set up your editor](#editor)
-4. [Build the Token contract](token/README.md)
-5. [Build the Voting contract](voting/README.md)
-6. [Expand the scope of the demo and keep working](#extensions-😊) (optional!)
+4. [Check out the Sway primer](PRIMER.md) (optional!)
+5. [Build the Token contract](token/README.md)
+6. [Build the Voting contract](voting/README.md)
+7. [Expand the scope of the demo and keep working](#extensions-😊) (optional!)
 
 ## Getting Started
 
