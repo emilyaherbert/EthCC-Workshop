@@ -1,6 +1,6 @@
 # EthCC Workshop
 
-During this workshop, we will build a smart contract that handles voting with multiple users calling the contract to vote. This demo is DAO-esque, demonstrating many of features that would be used in a full DAO contract.
+During this workshop, we will build a smart contract that handles voting with multiple users calling the contract to vote. This demo is DAO-esque, demonstrating many of features that would be used in a full DAO voting contract.
 
 We are writing a smart contract for a group of people who love numbers! They want to be able to keep track of the group's current favorite number and vote on new favorite numbers. The contract will use a governance token to allocate votes, and will allow users to deposit tokens, withdraw tokens, vote on a new favorite number, and execute the contract to count the votes and set a new favorite number.
 
