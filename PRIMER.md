@@ -40,6 +40,8 @@ And to run the tests:
 
 ```bash
 $ forc test
+running 1 test
+test can_get_contract_id ... ok
 ```
 
 `forc` has lots of other awesome features (try `forc --help`, but for the purposes of this workshop these ones above are the only ones that we will be discussing).
