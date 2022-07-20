@@ -103,9 +103,9 @@ fn insert_number(n: u64, on_or_off: bool) {
     storage.my_map.insert(n, on_or_off);
 }
 
-#[storage(write)]
+#[storage(read)]
 fn get_from_number(n: u64) -> bool {
-    storage.my_map.get(n);
+    storage.my_map.get(n)
 }
 ```
 
