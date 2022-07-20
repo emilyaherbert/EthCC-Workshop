@@ -6,13 +6,16 @@ use std::contract_id::ContractId;
 
 abi Voting {
     #[storage(read, write)]
-    fn initialize(token: ContractId, max_num: u64);
+    fn initialize(token: ContractId);
 
     #[storage(read)]
     fn get_balance() -> u64;
 
     #[storage(read)]
     fn get_favorite_number() -> u64;
+
+    #[storage(read)]
+    fn get_number_of_votes(number: u64) -> u64;
 
     #[storage(read, write)]
     fn deposit();

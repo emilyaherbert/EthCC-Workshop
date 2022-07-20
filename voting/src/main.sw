@@ -18,6 +18,8 @@ use std::{
     token::transfer,
 };
 
+const MAX_NUM = 100;
+
 storage {
     // tells us if it is initialized yet or not
     state: State = State::NotInitialized,
@@ -26,9 +28,6 @@ storage {
     token: ContractId = ContractId {
         value: 0x0000000000000000000000000000000000000000000000000000000000000000,
     },
-
-    // the max value that the favorite number could be
-    max_num: u64 = 0,
 
     // the current favorite number
     favorite_number: u64 = 0,
@@ -43,15 +42,14 @@ storage {
 impl Voting for Contract {
     // initialize with the governance token
     #[storage(read, write)]
-    fn initialize(token: ContractId, max_num: u64) {
+    fn initialize(token: ContractId) {
         require(storage.state == State::NotInitialized, InitializationError::CannotReinitialize);
 
         storage.token = token;
-        storage.max_num = max_num;
         storage.state = State::Initialized;
 
         let mut i = 0;
-        while i < storage.max_num {
+        while i < MAX_NUM {
             storage.number_votes.insert(i, 0);
             i += 1;
         }
@@ -60,6 +58,7 @@ impl Voting for Contract {
     // get the amount of governance tokens in this contract
     #[storage(read)]
     fn get_balance() -> u64 {
+        require(storage.state == State::Initialized, InitializationError::ContractNotInitialized);
         this_balance(storage.token)
     }
 
@@ -68,6 +67,14 @@ impl Voting for Contract {
     fn get_favorite_number() -> u64 {
         require(storage.state == State::Initialized, InitializationError::ContractNotInitialized);
         storage.favorite_number
+    }
+
+    // get the current number of votes for a particular number
+    #[storage(read)]
+    fn get_number_of_votes(number: u64) -> u64 {
+        require(storage.state == State::Initialized, InitializationError::ContractNotInitialized);
+        require(number < MAX_NUM, UserError::InvalidNumber);
+        storage.number_votes.get(number)
     }
 
     // deposit governance tokens
@@ -102,7 +109,7 @@ impl Voting for Contract {
     #[storage(read, write)]
     fn vote(voting_for: u64, vote_amount: u64) {
         require(storage.state == State::Initialized, InitializationError::ContractNotInitialized);
-        require(voting_for < storage.max_num, UserError::InvalidNumber);
+        require(voting_for < MAX_NUM, UserError::InvalidNumber);
 
         let user = msg_sender().unwrap();
         let user_balance = storage.user_balances.get(user);
@@ -113,38 +120,37 @@ impl Voting for Contract {
         storage.number_votes.insert(voting_for, storage.number_votes.get(voting_for) + vote_amount);
     }
 
-    // execute the votes
+    // execute the votes and sets the favorite number to the number with the most votes
+    //
+    // returns true if a new favorite number is set, and returns false if one is not set (e.g. in a tie)
     #[storage(read, write)]
     fn execute() -> bool {
         require(storage.state == State::Initialized, InitializationError::ContractNotInitialized);
 
         let mut highest_votes = 0;
         let mut new_favorite_number = Option::None;
-        let mut is_tie = false;
 
         let mut i = 0;
-        while i < storage.max_num {
+        while i < MAX_NUM {
             let number_votes = storage.number_votes.get(i);
             if number_votes > highest_votes {
                 highest_votes = number_votes;
                 new_favorite_number = Option::Some(i);
-                is_tie = false;
             } else if number_votes == highest_votes {
-                is_tie = true;
+                new_favorite_number = Option::None;
             }
             i += 1;
         }
 
         match new_favorite_number {
             Option::Some(new_favorite_number) => {
-                if !is_tie {
-                    let mut i = 0;
-                    while i < storage.max_num {
-                        storage.number_votes.insert(i, 0);
-                        i += 1;
-                    }
-                    return true;
+                let mut i = 0;
+                while i < MAX_NUM {
+                    storage.number_votes.insert(i, 0);
+                    i += 1;
                 }
+                storage.favorite_number = new_favorite_number;
+                return true;
             },
             Option::None => {},
         }
