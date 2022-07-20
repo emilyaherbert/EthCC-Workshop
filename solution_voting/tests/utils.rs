@@ -4,7 +4,7 @@ use fuels::{prelude::*, tx::ContractId};
 
 // Load abi from json
 abigen!(Voting, "./out/debug/voting-abi.json");
-abigen!(MyToken, "../token/out/debug/token-abi.json");
+abigen!(MyToken, "../solution_token/out/debug/token-abi.json");
 
 pub(crate) struct User {
     pub(crate) voting_handle: Voting,
@@ -27,11 +27,11 @@ pub(crate) async fn setup_tests() -> (ContractId, MyToken, [User; 4]) {
     let user_3_wallet = wallets.pop().unwrap();
 
     let token_contract_id = Contract::deploy(
-        "../token/out/debug/token.bin",
+        "../solution_token/out/debug/token.bin",
         &deployer_wallet,
         TxParameters::default(),
         StorageConfiguration::with_storage_path(Some(
-            "../token/out/debug/token-storage_slots.json".to_string(),
+            "../solution_token/out/debug/token-storage_slots.json".to_string(),
         )),
     )
     .await
