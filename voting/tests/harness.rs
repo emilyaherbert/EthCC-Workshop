@@ -10,7 +10,7 @@ mod should_pass {
     use super::*;
 
     #[tokio::test]
-    async fn mint_test() {
+    async fn deployer_can_mint() {
         let (token_contract_id, token_handle, [deployer, user_1, user_2, user_3]) =
             setup_tests().await;
 
@@ -49,7 +49,7 @@ mod should_pass {
     }
 
     #[tokio::test]
-    async fn initialize_test() {
+    async fn deployer_can_initialize_the_voting_contract() {
         let (token_contract_id, _, [deployer, _, _, _]) = setup_tests().await;
 
         // initialize the voting contract
@@ -60,7 +60,7 @@ mod should_pass {
     }
 
     #[tokio::test]
-    async fn deposit_test() {
+    async fn users_can_deposit() {
         let (token_contract_id, token_handle, [deployer, user_1, user_2, user_3]) =
             setup_tests().await;
 
@@ -96,7 +96,7 @@ mod should_pass {
     }
 
     #[tokio::test]
-    async fn withdraw_test() {
+    async fn users_can_deposit_and_withdraw() {
         let (token_contract_id, token_handle, [deployer, user_1, user_2, user_3]) =
             setup_tests().await;
 
@@ -267,19 +267,3 @@ mod should_pass {
         assert_eq!(get_favorite_number(&deployer.voting_handle).await, 1);
     }
 }
-
-// #[cfg(test)]
-// mod should_panic {
-//     use super::*;
-
-//     #[tokio::test]
-//     #[should_panic]
-//     async fn not_initialized() {
-//         //std::panic::set_hook(Box::new(|_| {}));
-
-//         let (_, _, [deployer, _, _, _]) = setup_tests().await;
-
-//         // check starting favorite number
-//         assert_eq!(get_favorite_number(&deployer.voting_handle).await, 0);
-//     }
-// }

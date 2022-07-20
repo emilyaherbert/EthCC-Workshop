@@ -12,4 +12,32 @@ The skeleton of the contract is written for you already, but you will be complet
 
 2. Familiarize yourself with [the error types](src/errors.sw) that we will be using in our contract 
 
-3. 
+2. Ensure that you are inside this subdirectory in your terminal, then run:
+
+    ```bash
+    $ forc test
+    failures:
+        should_pass::deployer_can_initialize_the_voting_contract
+        should_pass::deployer_can_mint
+        should_pass::multiple_users_can_vote
+        should_pass::users_can_deposit
+        should_pass::users_can_deposit_and_withdraw
+        should_pass::users_can_vote
+        should_pass::users_can_vote_for_multiple_numbers
+
+    test result: FAILED. 0 passed; 7 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.32s
+    ```
+
+    We expect all the test to fail at this point! We will be filling in the contract functions to make these tests pass.
+
+3. Complete the `initialize` function in [the `src/main.sw` file](src/main.sw)
+
+4. Ensure that you are inside this subdirectory in your terminal, then run:
+
+    ```bash
+    $ forc test
+    Compiled library "core".
+    Compiled library "std".
+    Compiled contract "token".
+    Bytecode size is 84 bytes.
+    ```

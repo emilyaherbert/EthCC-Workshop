@@ -6,7 +6,7 @@ The skeleton of the contract is written for you already, but you will be complet
 
 ### Steps
 
-1. Fill in the `mint_and_send_to_address` function in the [`src/main.sw` file](src/main.sw)
+1. Fill in the `mint_and_send_to_address` function in [the `src/main.sw` file](src/main.sw)
 
 2. Ensure that you are inside this subdirectory in your terminal, then run:
 
