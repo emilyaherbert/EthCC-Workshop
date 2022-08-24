@@ -8,7 +8,7 @@ use errors::*;
 
 use std::{
     contract_id::ContractId,
-    assert::require,
+    revert::require,
     storage::StorageMap,
     identity::Identity,
     context::{call_frames::msg_asset_id, msg_amount, this_balance},
